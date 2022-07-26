@@ -1,41 +1,43 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:drawables="clr-namespace:SortingAlgorithmVisualizer.Drawables"
              x:Class="SortingAlgorithmVisualizer.MainPage">
 
-    <ScrollView>
-        <VerticalStackLayout
-            Spacing="25"
-            Padding="30,0"
-            VerticalOptions="Center">
+    <ContentPage.Resources>
+        <drawables:Visualizer x:Key="drawer"/>
+    </ContentPage.Resources>
 
-            <Image
-                Source="dotnet_bot.png"
-                SemanticProperties.Description="Cute dot net bot waving hi to you!"
-                HeightRequest="200"
-                HorizontalOptions="Center" />
+    <Grid BackgroundColor="White" 
+        Padding="40,0,40,0">
 
-            <Label
-                Text="Hello, World!"
-                SemanticProperties.HeadingLevel="Level1"
-                FontSize="32"
-                HorizontalOptions="Center" />
+        <Grid.RowDefinitions>
+            <RowDefinition Height="90"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
 
-            <Label
-                Text="Welcome to .NET Multi-platform App UI"
-                SemanticProperties.HeadingLevel="Level2"
-                SemanticProperties.Description="Welcome to dot net Multi platform App U I"
-                FontSize="18"
-                HorizontalOptions="Center" />
+        <HorizontalStackLayout Grid.Row="0" Background="Green" Padding="0,10" Spacing="10">
+            <Picker x:Name="SortSelector" 
+                    Title="                 Select Sort" WidthRequest="175" 
+                    HorizontalTextAlignment="Center" VerticalTextAlignment="Center">
+                <Picker.ItemsSource>
+                    <x:Array Type="{x:Type x:String}">
+                        <x:String>Bubble Sort</x:String>
+                        <x:String>Merge Sort</x:String>
+                        <x:String>Quick Sort</x:String>
+                        <x:String>...</x:String>
+                    </x:Array>
+                </Picker.ItemsSource>
+            </Picker>
+            <ImageButton x:Name="PlayBtn" Source="dotnet_bot.png" Clicked="RunBtnClicked"/>
+            <Button x:Name="GenerateBtn" Text="Generate" Clicked="GenerateBtnClicked"/>
+            <Entry x:Name="ArraySizeEntry" Text="Size" Completed="ArraySizeChanged" MaxLength="4" WidthRequest="70" HorizontalTextAlignment="Center"/>
+        </HorizontalStackLayout>
 
-            <Button
-                x:Name="CounterBtn"
-                Text="Click me"
-                SemanticProperties.Hint="Counts the number of times you click"
-                Clicked="OnCounterClicked"
-                HorizontalOptions="Center" />
+        <GraphicsView Grid.Row="1"
+                      Drawable="{StaticResource drawer}"
+                      x:Name="VisualizerView"/>
+        
 
-        </VerticalStackLayout>
-    </ScrollView>
-
+    </Grid>
 </ContentPage>

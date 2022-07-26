@@ -1,4 +1,6 @@
-﻿namespace SortingAlgorithmVisualizer;
+﻿using SortingAlgorithmVisualizer.Drawables;
+
+namespace SortingAlgorithmVisualizer;
 
 public static class MauiProgram
 {
