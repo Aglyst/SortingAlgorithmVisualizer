@@ -9,14 +9,14 @@
     </ContentPage.Resources>
 
     <Grid BackgroundColor="White" 
-        Padding="40,0,40,0">
+        Padding="43,0,43,0">
 
         <Grid.RowDefinitions>
             <RowDefinition Height="90"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <HorizontalStackLayout Grid.Row="0" Background="Green" Padding="0,10" Spacing="10">
+        <HorizontalStackLayout Grid.Row="0" Background="Black" Padding="0,10" Spacing="10">
             <Picker x:Name="SortSelector" 
                     Title="                 Select Sort" WidthRequest="175" 
                     HorizontalTextAlignment="Center" VerticalTextAlignment="Center">

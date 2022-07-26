@@ -19,10 +19,10 @@ public partial class MainPage : ContentPage
 
 	private void RunBtnClicked(object sender, EventArgs e)
 	{
-		//Visualizer.mode = CanvasMode.Presort;
-		//VisualizerView.Invalidate();
-
-		// Sort.Run(mainArray);
+		if (isGenerated)
+		{
+            // Sort.Run(mainArray);
+        }
 
         VisualizerView.Invalidate();	// Refresh for debugging purposes, need to remove later
     }
@@ -38,21 +38,28 @@ public partial class MainPage : ContentPage
 
 		mainArray.Clear();
 		// generate array
-		for (int i = 0; i <= (arrayLength-1); i++)
+		for (int i = 0; i < arrayLength; i++)
 		{
-			mainArray.Add(r.Next(1, 1000)); 
+			mainArray.Add(r.Next(1, 500)); 
 		}
 
 		Visualizer.array = mainArray;
 		isGenerated = true;
 
+        // Visualizer.mode = CanvasMode.Presort;
+        // VisualizerView.Invalidate();
 
+		Visualizer.mode = CanvasMode.Sorting;
+        VisualizerView.Invalidate();
 
-		//Visualizer.temp = r.Next().ToString();		// Also for debugging purposes, need to remove later
-	}
+        //Visualizer.temp = r.Next().ToString();		// Also for debugging purposes, need to remove later
+    }
 
 	private void ArraySizeChanged(object sender, EventArgs e)
 	{
+		isGenerated = false;
+		
+		
 		string s = ((Entry)sender).Text;
 		 
 		if (int.TryParse(s, out arrayLength))

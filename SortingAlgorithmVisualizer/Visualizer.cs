@@ -15,16 +15,27 @@ namespace SortingAlgorithmVisualizer.Drawables
             if (mode is CanvasMode.Startup)
             {
                 canvas.DrawRectangle(dirtyRect);
-                canvas.DrawString(DateTime.Now.ToString(), 80, 10, HorizontalAlignment.Center);
-                canvas.DrawString(temp, 10, 20, HorizontalAlignment.Center);
             }
-            else if (mode is CanvasMode.Presort)
-            {
-                // calculate size of rectangles...
-            }
+            //else if (mode is CanvasMode.Presort)
+            //{
+            //    
+            //}
             else if (mode is CanvasMode.Sorting)
             {
                 // render rectangles...
+                // Note: Maui draws rectangles from top left(following coordinate system where top left of view is (0,0)
+                float rectWidth = dirtyRect.Width / array.Count;
+
+                for (int i = 0; i < array.Count; i++)
+                {
+                    RectF r = new RectF(i * rectWidth, dirtyRect.Height - array[i], rectWidth, array[i]);
+                    canvas.DrawRectangle(r);
+
+                    if (array.Count < 66)   // checks if rectangle is wide enough for value display
+                    {
+                        canvas.DrawString(array[i].ToString(), r.Center.X, r.Center.Y, HorizontalAlignment.Center);
+                    }
+                }
             }
 
         }
@@ -33,8 +44,8 @@ namespace SortingAlgorithmVisualizer.Drawables
     public enum CanvasMode
     {
         Startup,
-        Presort,
+        Presort,    // might need to remove
         Sorting,
-        Postsort
+        Postsort    // might need to remove
     }
 }
