@@ -23,6 +23,10 @@ public partial class MainPage : ContentPage
 		{
             // Sort.Run(mainArray);
         }
+		else
+		{
+            Shell.Current.DisplayAlert("Error", "Please generate an array", "Ok");
+        }
 
         VisualizerView.Invalidate();	// Refresh for debugging purposes, need to remove later
     }
@@ -59,7 +63,6 @@ public partial class MainPage : ContentPage
 	{
 		isGenerated = false;
 		
-		
 		string s = ((Entry)sender).Text;
 		 
 		if (int.TryParse(s, out arrayLength))
@@ -72,7 +75,7 @@ public partial class MainPage : ContentPage
 			}
 
 			Thread.Sleep(10);		// Need to put this due to race-condition(?), otherwise line below doesn't run; need to do more research
-			Visualizer.temp = arrayLength.ToString();
+			Visualizer.arrayMax = arrayLength;
 		}
 		else
 		{

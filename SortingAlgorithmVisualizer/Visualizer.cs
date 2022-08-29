@@ -8,10 +8,12 @@ namespace SortingAlgorithmVisualizer.Drawables
 
         public static string temp = "A";
         public static List<int> array = new List<int>();
-        Random random = new Random();
+        public static int arrayMax;
 
         public void Draw(ICanvas canvas, RectF dirtyRect)
         {
+            // canvas.StrokeColor = Colors.White;
+
             if (mode is CanvasMode.Startup)
             {
                 canvas.DrawRectangle(dirtyRect);
@@ -28,7 +30,8 @@ namespace SortingAlgorithmVisualizer.Drawables
 
                 for (int i = 0; i < array.Count; i++)
                 {
-                    RectF r = new RectF(i * rectWidth, dirtyRect.Height - array[i], rectWidth, array[i]);
+                    float height = ((float)array[i] / 500) * dirtyRect.Height;
+                    RectF r = new RectF(i * rectWidth, dirtyRect.Height - height, rectWidth, height);
                     canvas.DrawRectangle(r);
 
                     if (array.Count < 66)   // checks if rectangle is wide enough for value display
@@ -37,7 +40,6 @@ namespace SortingAlgorithmVisualizer.Drawables
                     }
                 }
             }
-
         }
     }
 

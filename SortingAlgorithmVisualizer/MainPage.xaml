@@ -31,7 +31,7 @@
             </Picker>
             <ImageButton x:Name="PlayBtn" Source="dotnet_bot.png" Clicked="RunBtnClicked"/>
             <Button x:Name="GenerateBtn" Text="Generate" Clicked="GenerateBtnClicked"/>
-            <Entry x:Name="ArraySizeEntry" Text="Size" Completed="ArraySizeChanged" MaxLength="4" WidthRequest="70" HorizontalTextAlignment="Center"/>
+            <Entry x:Name="ArraySizeEntry" Placeholder="Size" Completed="ArraySizeChanged" MaxLength="4" WidthRequest="70" HorizontalTextAlignment="Center"/>
         </HorizontalStackLayout>
 
         <GraphicsView Grid.Row="1"
