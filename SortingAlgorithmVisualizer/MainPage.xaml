@@ -33,6 +33,7 @@
             <ImageButton x:Name="PlayBtn" Source="dotnet_bot.png" Clicked="RunBtnClicked"/>
             <Button x:Name="GenerateBtn" Text="Generate" Clicked="GenerateBtnClicked"/>
             <Entry x:Name="ArraySizeEntry" Placeholder="Size" TextChanged="ArraySizeChanged" MaxLength="4" WidthRequest="70" HorizontalTextAlignment="Center"/>
+            <Slider x:Name="DelaySlider" Minimum="0" Maximum="1000" BackgroundColor="White" WidthRequest="500"/>
         </HorizontalStackLayout>
 
         <GraphicsView Grid.Row="1"

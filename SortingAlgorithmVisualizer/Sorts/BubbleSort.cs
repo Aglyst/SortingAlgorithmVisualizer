@@ -2,7 +2,12 @@
 
 internal class BubbleSort : SortBase
 {
-    public override void Run(List<int> arr, MainPage m)
+    public BubbleSort()
+    {
+        
+    }
+
+    public override async Task Run(List<int> arr, GraphicsView g, int waitTime)
     {
         for (int i = 0; i <= arr.Count - 2; i++)
         {
@@ -10,8 +15,12 @@ internal class BubbleSort : SortBase
             {
                 if (arr[j] > arr[j + 1])
                 {
-                    Swap(arr[j + 1], arr[j]);
-                    m.Refresh();
+                    int temp = arr[j + 1];
+                    arr[j + 1] = arr[j];
+                    arr[j] = temp;
+
+                    await Task.Delay(waitTime);
+                    g.Invalidate();
                 }
             }
         }

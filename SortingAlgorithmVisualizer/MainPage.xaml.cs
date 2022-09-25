@@ -5,7 +5,7 @@ namespace SortingAlgorithmVisualizer;
 
 public partial class MainPage : ContentPage
 {
-	SortBase sort;
+	BubbleSort sort;
 
 	List<int> mainArray = new List<int>();
 	int arrayLength = 0;
@@ -19,13 +19,13 @@ public partial class MainPage : ContentPage
 		r = new Random();
 	}
 
-	private void RunBtnClicked(object sender, EventArgs e)
+	private async void RunBtnClicked(object sender, EventArgs e)
 	{
 		if (isGenerated)
 		{
 			try
 			{
-                sort.Run(mainArray, this);
+                await sort.Run(mainArray, VisualizerView, (int)DelaySlider.Value);
             }
 			catch
 			{
@@ -105,6 +105,11 @@ public partial class MainPage : ContentPage
 	}
 
 	public void Refresh()
+	{
+        VisualizerView.Invalidate();
+    }
+
+	private void A_Clicked(object sender, EventArgs e)
 	{
         VisualizerView.Invalidate();
     }

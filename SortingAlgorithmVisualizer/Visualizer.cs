@@ -30,8 +30,8 @@ public class Visualizer : IDrawable
 
             for (int i = 0; i < array.Count; i++)
             {
-                float height = ((float)array[i] / 500) * dirtyRect.Height;
-                RectF r = new RectF(i * rectWidth, dirtyRect.Height - height, rectWidth, height);
+                float height = 50 + ((float)array[i] / 500) * dirtyRect.Height;
+                RectF r = new RectF(i * rectWidth, dirtyRect.Height - height, rectWidth, height + 50);
                 canvas.DrawRectangle(r);
 
                 if (array.Count < 66)   // checks if rectangle is wide enough for value display
