@@ -19,7 +19,8 @@
         <HorizontalStackLayout Grid.Row="0" Background="Black" Padding="0,10" Spacing="10">
             <Picker x:Name="SortSelector" 
                     Title="                 Select Sort" WidthRequest="175" 
-                    HorizontalTextAlignment="Center" VerticalTextAlignment="Center">
+                    HorizontalTextAlignment="Center" VerticalTextAlignment="Center"
+                    SelectedIndexChanged="SortChanged">
                 <Picker.ItemsSource>
                     <x:Array Type="{x:Type x:String}">
                         <x:String>Bubble Sort</x:String>
@@ -31,7 +32,7 @@
             </Picker>
             <ImageButton x:Name="PlayBtn" Source="dotnet_bot.png" Clicked="RunBtnClicked"/>
             <Button x:Name="GenerateBtn" Text="Generate" Clicked="GenerateBtnClicked"/>
-            <Entry x:Name="ArraySizeEntry" Placeholder="Size" Completed="ArraySizeChanged" MaxLength="4" WidthRequest="70" HorizontalTextAlignment="Center"/>
+            <Entry x:Name="ArraySizeEntry" Placeholder="Size" TextChanged="ArraySizeChanged" MaxLength="4" WidthRequest="70" HorizontalTextAlignment="Center"/>
         </HorizontalStackLayout>
 
         <GraphicsView Grid.Row="1"
