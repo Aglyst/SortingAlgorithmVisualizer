@@ -5,7 +5,7 @@ namespace SortingAlgorithmVisualizer;
 
 public partial class MainPage : ContentPage
 {
-	BubbleSort sort;
+	public SortBase sort;
 
 	List<int> mainArray = new List<int>();
 	int arrayLength = 0;
@@ -17,6 +17,8 @@ public partial class MainPage : ContentPage
 		InitializeComponent();
 
 		r = new Random();
+
+		BindingContext = this;
 	}
 
 	private async void RunBtnClicked(object sender, EventArgs e)
@@ -102,15 +104,7 @@ public partial class MainPage : ContentPage
 		{
 			sort = new BubbleSort();
 		}
-	}
 
-	public void Refresh()
-	{
-        VisualizerView.Invalidate();
-    }
-
-	private void A_Clicked(object sender, EventArgs e)
-	{
-        VisualizerView.Invalidate();
+        // SortInfo.Text = $"Comparisons: {sort.comparisons} | Swaps: {sort.swaps} | Accesses: {sort.acceses} | Time Complexity: {sort.timeComplexity} | Space Complexity: {sort.spaceComplexity}";
     }
 }

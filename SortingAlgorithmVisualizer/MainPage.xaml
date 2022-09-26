@@ -8,11 +8,12 @@
         <drawables:Visualizer x:Key="drawer"/>
     </ContentPage.Resources>
 
-    <Grid BackgroundColor="White" 
+    <Grid BackgroundColor="Black" 
         Padding="43,0,43,0">
 
         <Grid.RowDefinitions>
             <RowDefinition Height="90"/>
+            <RowDefinition Height="40"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
@@ -36,7 +37,19 @@
             <Slider x:Name="DelaySlider" Minimum="0" Maximum="1000" BackgroundColor="White" WidthRequest="500"/>
         </HorizontalStackLayout>
 
-        <GraphicsView Grid.Row="1"
+        <Label x:Name="SortInfo" Grid.Row="1" TextColor="White">
+            <Label.Text>
+                <MultiBinding StringFormat="{}Comparisons: {0} | Swaps: {1} | Accesses: {2} | Time Complexity: {3} | Space Complexity: {4}">
+                    <Binding Path="sort.comparisons" />
+                    <Binding Path="sort.swaps" />
+                    <Binding Path="sort.acceses" />
+                    <Binding Path="sort.timeComplexity" />
+                    <Binding Path="sort.spaceComplexity" />
+                </MultiBinding>
+            </Label.Text>
+        </Label>
+
+        <GraphicsView Grid.Row="2"
                       Drawable="{StaticResource drawer}"
                       x:Name="VisualizerView"/>
         

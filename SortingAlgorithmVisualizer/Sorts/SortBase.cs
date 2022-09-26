@@ -1,13 +1,13 @@
 ﻿namespace SortingAlgorithmVisualizer.Sorts;
 
-internal abstract class SortBase
+public abstract class SortBase
 {
-    protected int comparisons;
-    protected int swaps;
-    protected int acceses;
+    public int comparisons;
+    public int swaps;
+    public int acceses;
 
-    protected string timeComplexity;
-    protected string spaceComplexity;
+    public string timeComplexity;
+    public string spaceComplexity;
 
     public abstract Task Run(List<int> arr, GraphicsView g, int waitTime);
 }

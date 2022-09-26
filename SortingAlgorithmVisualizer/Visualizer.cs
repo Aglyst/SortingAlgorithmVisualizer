@@ -12,18 +12,19 @@ public class Visualizer : IDrawable
 
     public void Draw(ICanvas canvas, RectF dirtyRect)
     {
-        // canvas.StrokeColor = Colors.White;
-
         if (mode is CanvasMode.Startup)
         {
-            canvas.DrawRectangle(dirtyRect);
+            canvas.FillColor = Colors.Black;
+            canvas.FillRectangle(dirtyRect);
         }
-        //else if (mode is CanvasMode.Presort)
-        //{
-        //    
-        //}
         else if (mode is CanvasMode.Sorting)
         {
+            canvas.FillColor = Colors.Black;
+            canvas.FillRectangle(dirtyRect);
+
+            canvas.StrokeColor = Colors.White;
+            canvas.FontColor = Colors.White;
+
             // render rectangles...
             // Note: Maui draws rectangles from top left(following coordinate system where top left of view is (0,0))
             float rectWidth = dirtyRect.Width / array.Count;
@@ -46,8 +47,6 @@ public class Visualizer : IDrawable
 public enum CanvasMode
 {
     Startup,
-    Presort,    // might need to remove
     Sorting,
-    Postsort    // might need to remove
 }
 
