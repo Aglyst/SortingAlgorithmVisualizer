@@ -2,12 +2,14 @@
 
 public class BubbleSort : SortBase
 {
-    public BubbleSort()
+    public BubbleSort(MainPage m)
     {
-        timeComplexity = "BS 0(n^2)";
-        spaceComplexity = "BS O(n)";
+        base.MainPage(m);
+        timeComplexity = "O(n^2)";
+        spaceComplexity = "O(1)";
     }
-    public override async Task Run(List<int> arr, GraphicsView g, int waitTime)
+
+    public override async Task Run(List<int> arr, int waitTime)
     {
         for (int i = 0; i <= arr.Count - 2; i++)
         {
@@ -15,14 +17,20 @@ public class BubbleSort : SortBase
             {
                 if (arr[j] > arr[j + 1])
                 {
-                    acceses += 2;
-                    comparisons += 3;
+                    comparisons += 1;
+
                     int temp = arr[j + 1];
                     arr[j + 1] = arr[j];
                     arr[j] = temp;
+
                     swaps += 1;
+
                     await Task.Delay(waitTime);
-                    g.Invalidate();
+                    page.Update();
+                }
+                else
+                {
+                    comparisons += 1;
                 }
             }
         }

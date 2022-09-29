@@ -8,12 +8,12 @@ namespace SortingAlgorithmVisualizer.Sorts
 {
     internal class QuickSort : SortBase
     {
-        public QuickSort()
+        public QuickSort(MainPage m)
         {
-
+            page = m;
         }
 
-        public override async Task Run(List<int> arr, GraphicsView g, int waitTime)
+        public override async Task Run(List<int> arr, int waitTime)
         {
 
         }

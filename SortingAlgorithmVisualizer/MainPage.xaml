@@ -1,6 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:SortingAlgorithmVisualizer"
              xmlns:drawables="clr-namespace:SortingAlgorithmVisualizer.Drawables"
              x:Class="SortingAlgorithmVisualizer.MainPage">
 
@@ -17,10 +18,10 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <HorizontalStackLayout Grid.Row="0" Background="Black" Padding="0,10" Spacing="10">
+        <HorizontalStackLayout Grid.Row="0" Background="Black" Padding="0,20,0,0" Spacing="30" HorizontalOptions="Center">
             <Picker x:Name="SortSelector" 
-                    Title="                 Select Sort" WidthRequest="175" 
-                    HorizontalTextAlignment="Center" VerticalTextAlignment="Center"
+                    Title="               Select Sort" WidthRequest="175" 
+                    HorizontalTextAlignment="Center" VerticalTextAlignment="Start"
                     SelectedIndexChanged="SortChanged">
                 <Picker.ItemsSource>
                     <x:Array Type="{x:Type x:String}">
@@ -31,23 +32,17 @@
                     </x:Array>
                 </Picker.ItemsSource>
             </Picker>
-            <ImageButton x:Name="PlayBtn" Source="dotnet_bot.png" Clicked="RunBtnClicked"/>
+            <ImageButton x:Name="PlayBtn" Source="playbutton.png" Clicked="RunBtnClicked"/>
             <Button x:Name="GenerateBtn" Text="Generate" Clicked="GenerateBtnClicked"/>
-            <Entry x:Name="ArraySizeEntry" Placeholder="Size" TextChanged="ArraySizeChanged" MaxLength="4" WidthRequest="70" HorizontalTextAlignment="Center"/>
-            <Slider x:Name="DelaySlider" Minimum="0" Maximum="1000" BackgroundColor="White" WidthRequest="500"/>
+            <Entry x:Name="ArraySizeEntry" Placeholder="Size" TextChanged="ArraySizeChanged" MaxLength="4" WidthRequest="100" HorizontalTextAlignment="Center"/>
+            <VerticalStackLayout WidthRequest="250">
+                <Label Text="Speed" HorizontalOptions="Center"/>
+                <Slider x:Name="DelaySlider" Minimum="0" Maximum="500" BackgroundColor="White" WidthRequest="250"/>
+                <Label BindingContext="{x:Reference DelaySlider}" Text="{Binding Value, StringFormat='Delay: {0} ms'}" HorizontalOptions="Center"/>
+            </VerticalStackLayout>
         </HorizontalStackLayout>
 
-        <Label x:Name="SortInfo" Grid.Row="1" TextColor="White">
-            <Label.Text>
-                <MultiBinding StringFormat="{}Comparisons: {0} | Swaps: {1} | Accesses: {2} | Time Complexity: {3} | Space Complexity: {4}">
-                    <Binding Path="sort.comparisons" />
-                    <Binding Path="sort.swaps" />
-                    <Binding Path="sort.acceses" />
-                    <Binding Path="sort.timeComplexity" />
-                    <Binding Path="sort.spaceComplexity" />
-                </MultiBinding>
-            </Label.Text>
-        </Label>
+        <Label x:Name="SortInfo" Grid.Row="1" TextColor="White" HorizontalOptions="Center"/>
 
         <GraphicsView Grid.Row="2"
                       Drawable="{StaticResource drawer}"

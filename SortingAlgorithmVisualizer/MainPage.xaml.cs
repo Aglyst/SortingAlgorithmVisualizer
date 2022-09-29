@@ -7,19 +7,19 @@ public partial class MainPage : ContentPage
 {
 	public SortBase sort;
 
-	List<int> mainArray = new List<int>();
+    List<int> mainArray = new List<int>();
 	int arrayLength = 0;
 	bool isGenerated; // might remove if unnecesary;
 	Random r;
 
-	public MainPage()
+    public MainPage()
 	{
 		InitializeComponent();
 
 		r = new Random();
 
 		BindingContext = this;
-	}
+    }
 
 	private async void RunBtnClicked(object sender, EventArgs e)
 	{
@@ -27,7 +27,8 @@ public partial class MainPage : ContentPage
 		{
 			try
 			{
-                await sort.Run(mainArray, VisualizerView, (int)DelaySlider.Value);
+				sort.ClearValues();
+                await sort.Run(mainArray, (int)DelaySlider.Value);
             }
 			catch
 			{
@@ -61,13 +62,8 @@ public partial class MainPage : ContentPage
 		Visualizer.array = mainArray;
 		isGenerated = true;
 
-		// Visualizer.mode = CanvasMode.Presort;
-		// VisualizerView.Invalidate();
-
 		Visualizer.mode = CanvasMode.Sorting;
 		VisualizerView.Invalidate();
-
-		//Visualizer.temp = r.Next().ToString();		// Also for debugging purposes, need to remove later
 	}
 
 	private void ArraySizeChanged(object sender, EventArgs e)
@@ -102,9 +98,23 @@ public partial class MainPage : ContentPage
 
 		if (val == "Bubble Sort")
 		{
-			sort = new BubbleSort();
+			sort = new BubbleSort(this);
+		}
+		else if (val == "Merge Sort")
+		{
+			sort = new MergeSort(this);
+		}
+		else if (val == "Quick Sort")
+		{
+			sort = new QuickSort(this);
 		}
 
-        // SortInfo.Text = $"Comparisons: {sort.comparisons} | Swaps: {sort.swaps} | Accesses: {sort.acceses} | Time Complexity: {sort.timeComplexity} | Space Complexity: {sort.spaceComplexity}";
+        SortInfo.Text = $"Comparisons: {sort.comparisons} | Swaps: {sort.swaps} | Time Complexity: {sort.timeComplexity} | Space Complexity: {sort.spaceComplexity}";
+    }
+
+    public void Update()
+	{
+		VisualizerView.Invalidate();
+        SortInfo.Text = $"Comparisons: {sort.comparisons} | Swaps: {sort.swaps} | Time Complexity: {sort.timeComplexity} | Space Complexity: {sort.spaceComplexity}";
     }
 }
