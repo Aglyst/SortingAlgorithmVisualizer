@@ -15,7 +15,7 @@ public abstract class SortBase
         page = m;
     }
 
-    public abstract Task Run(List<int> arr, int waitTime);
+    public abstract Task Run(List<int> arr, int waitTime, CancellationToken ct);
 
     public void ClearValues()
     {

@@ -3,7 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace:SortingAlgorithmVisualizer"
              xmlns:drawables="clr-namespace:SortingAlgorithmVisualizer.Drawables"
-             x:Class="SortingAlgorithmVisualizer.MainPage">
+             x:Class="SortingAlgorithmVisualizer.MainPage"
+             BindingContext="{Binding Source={RelativeSource Self}}">
 
     <ContentPage.Resources>
         <drawables:Visualizer x:Key="drawer"/>
@@ -13,8 +14,8 @@
         Padding="43,0,43,0">
 
         <Grid.RowDefinitions>
-            <RowDefinition Height="90"/>
-            <RowDefinition Height="40"/>
+            <RowDefinition Height="110"/>
+            <RowDefinition Height="50"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
@@ -32,14 +33,15 @@
                     </x:Array>
                 </Picker.ItemsSource>
             </Picker>
-            <ImageButton x:Name="PlayBtn" Source="playbutton.png" Clicked="RunBtnClicked"/>
-            <Button x:Name="GenerateBtn" Text="Generate" Clicked="GenerateBtnClicked"/>
-            <Entry x:Name="ArraySizeEntry" Placeholder="Size" TextChanged="ArraySizeChanged" MaxLength="4" WidthRequest="100" HorizontalTextAlignment="Center"/>
-            <VerticalStackLayout WidthRequest="250">
+            <ImageButton x:Name="PlayBtn" Source="playbutton.png" Clicked="RunBtnClicked" IsEnabled="{Binding Path='NotCurrentlySorting'}"/>
+            <Button x:Name="GenerateBtn" Text="Generate" Clicked="GenerateBtnClicked" IsEnabled="{Binding Path='NotCurrentlySorting'}"/>
+            <Entry x:Name="ArraySizeEntry" Placeholder="Size" TextChanged="ArraySizeChanged" MaxLength="4" WidthRequest="100" HorizontalTextAlignment="Center" IsEnabled="{Binding Path='NotCurrentlySorting'}"/>
+            <VerticalStackLayout WidthRequest="250" IsEnabled="{Binding Path='NotCurrentlySorting'}">
                 <Label Text="Speed" HorizontalOptions="Center"/>
                 <Slider x:Name="DelaySlider" Minimum="0" Maximum="500" BackgroundColor="White" WidthRequest="250"/>
                 <Label BindingContext="{x:Reference DelaySlider}" Text="{Binding Value, StringFormat='Delay: {0} ms'}" HorizontalOptions="Center"/>
             </VerticalStackLayout>
+            <Button x:Name="StopBtn" Text="Stop" Clicked="StopSorting" IsEnabled="{Binding Path='CurrentlySorting'}"/>
         </HorizontalStackLayout>
 
         <Label x:Name="SortInfo" Grid.Row="1" TextColor="White" HorizontalOptions="Center"/>

@@ -9,12 +9,17 @@ public class BubbleSort : SortBase
         spaceComplexity = "O(1)";
     }
 
-    public override async Task Run(List<int> arr, int waitTime)
+    public override async Task Run(List<int> arr, int waitTime, CancellationToken ct)
     {
         for (int i = 0; i <= arr.Count - 2; i++)
         {
             for (int j = 0; j <= arr.Count - 2; j++)
             {
+                if (ct.IsCancellationRequested)
+                {
+                    ct.ThrowIfCancellationRequested();
+                }
+
                 if (arr[j] > arr[j + 1])
                 {
                     comparisons += 1;
@@ -31,6 +36,7 @@ public class BubbleSort : SortBase
                 else
                 {
                     comparisons += 1;
+                    page.Update();
                 }
             }
         }

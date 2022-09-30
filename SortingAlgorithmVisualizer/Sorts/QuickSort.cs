@@ -13,7 +13,7 @@ namespace SortingAlgorithmVisualizer.Sorts
             page = m;
         }
 
-        public override async Task Run(List<int> arr, int waitTime)
+        public override async Task Run(List<int> arr, int waitTime, CancellationToken ct)
         {
 
         }

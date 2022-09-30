@@ -1,11 +1,36 @@
 ﻿using SortingAlgorithmVisualizer.Drawables;
 using SortingAlgorithmVisualizer.Sorts;
-
+using System.ComponentModel;
 namespace SortingAlgorithmVisualizer;
 
-public partial class MainPage : ContentPage
+public partial class MainPage : ContentPage, INotifyPropertyChanged
 {
 	public SortBase sort;
+	CancellationTokenSource cancellationToken = null;
+
+    public event PropertyChangedEventHandler PropertyChanged;
+    public bool currentlySorting = false;
+    public bool CurrentlySorting
+    {
+        get => currentlySorting;
+		set
+        {
+            currentlySorting = value;
+            NotifyPropertyChanged(nameof(CurrentlySorting));
+            NotifyPropertyChanged(nameof(NotCurrentlySorting));
+        }
+    }
+
+    public bool NotCurrentlySorting => !CurrentlySorting;
+    /*public bool NotCurrentlySorting
+	{
+        get => !currentlySorting;
+        set
+        {
+            currentlySorting = value;
+            NotifyPropertyChanged(nameof(NotCurrentlySorting));
+        }
+    }*/
 
     List<int> mainArray = new List<int>();
 	int arrayLength = 0;
@@ -17,8 +42,6 @@ public partial class MainPage : ContentPage
 		InitializeComponent();
 
 		r = new Random();
-
-		BindingContext = this;
     }
 
 	private async void RunBtnClicked(object sender, EventArgs e)
@@ -28,16 +51,27 @@ public partial class MainPage : ContentPage
 			try
 			{
 				sort.ClearValues();
-                await sort.Run(mainArray, (int)DelaySlider.Value);
+				cancellationToken = new CancellationTokenSource();
+				try
+				{
+					CurrentlySorting = true;
+                    await sort.Run(mainArray, (int)DelaySlider.Value, cancellationToken.Token);
+					CurrentlySorting = false;
+                }
+				catch (OperationCanceledException ex) { }
+				finally
+				{
+					cancellationToken.Dispose();
+				}
             }
 			catch
 			{
-                Shell.Current.DisplayAlert("Error", "Please Select a Sort", "Ok");
+                await Shell.Current.DisplayAlert("Error", "Please Select a Sort", "Ok");
             }
 		}
 		else
 		{
-			Shell.Current.DisplayAlert("Error", "Please generate an array", "Ok");
+			await Shell.Current.DisplayAlert("Error", "Please generate an array", "Ok");
 		}
 
 		VisualizerView.Invalidate();    // Refresh for debugging purposes, need to remove later
@@ -112,9 +146,20 @@ public partial class MainPage : ContentPage
         SortInfo.Text = $"Comparisons: {sort.comparisons} | Swaps: {sort.swaps} | Time Complexity: {sort.timeComplexity} | Space Complexity: {sort.spaceComplexity}";
     }
 
+    private void StopSorting(object sender, EventArgs e)
+    {
+		cancellationToken.Cancel();
+		CurrentlySorting = false;
+    }
+
     public void Update()
 	{
 		VisualizerView.Invalidate();
         SortInfo.Text = $"Comparisons: {sort.comparisons} | Swaps: {sort.swaps} | Time Complexity: {sort.timeComplexity} | Space Complexity: {sort.spaceComplexity}";
+    }
+
+	public void NotifyPropertyChanged(string name)
+	{
+        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
     }
 }
