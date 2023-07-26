@@ -1,16 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace SortingAlgorithmVisualizer.Sorts
+﻿namespace SortingAlgorithmVisualizer.Sorts
 {
     internal class QuickSort : SortBase
     {
         public QuickSort(MainPage m)
         {
-            page = m;
+            base.MainPage(m);
+            timeComplexity = "O(n^2) θ(nlogn) Ω(nlogn)";
+            spaceComplexity = "O(n)";
         }
 
         public override async Task Run(List<int> arr, int waitTime, CancellationToken ct)

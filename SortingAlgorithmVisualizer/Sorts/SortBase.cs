@@ -22,5 +22,13 @@ public abstract class SortBase
         comparisons = 0;
         swaps = 0;
     }
+
+    protected void Swap(List<int> ar, int ind1, int ind2)
+    {
+        int temp = ar[ind1];
+        ar[ind1] = ar[ind2];
+        ar[ind2] = temp;
+        swaps++;
+    }
 }
 

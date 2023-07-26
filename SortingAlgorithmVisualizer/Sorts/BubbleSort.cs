@@ -1,11 +1,11 @@
 ﻿namespace SortingAlgorithmVisualizer.Sorts;
 
-public class BubbleSort : SortBase
+internal class BubbleSort : SortBase
 {
     public BubbleSort(MainPage m)
     {
         base.MainPage(m);
-        timeComplexity = "O(n^2)";
+        timeComplexity = "O(n^2) θ(n^2) Ω(n)";
         spaceComplexity = "O(1)";
     }
 
@@ -22,24 +22,20 @@ public class BubbleSort : SortBase
 
                 if (arr[j] > arr[j + 1])
                 {
-                    comparisons += 1;
+                    comparisons++;
 
-                    int temp = arr[j + 1];
-                    arr[j + 1] = arr[j];
-                    arr[j] = temp;
-
-                    swaps += 1;
+                    Swap(arr, j, j + 1);
 
                     await Task.Delay(waitTime);
                     page.Update();
                 }
                 else
                 {
-                    comparisons += 1;
+                    comparisons++;
                     page.Update();
                 }
             }
         }
     }
-}
+} 
 

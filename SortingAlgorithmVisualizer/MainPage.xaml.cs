@@ -142,8 +142,16 @@ public partial class MainPage : ContentPage, INotifyPropertyChanged
 		{
 			sort = new QuickSort(this);
 		}
+        else if (val == "Selection Sort")
+        {
+            sort = new SelectionSort(this);
+        }
+		else if (val == "Insertion Sort")
+		{
+            sort = new InsertionSort(this);
+        }
 
-        SortInfo.Text = $"Comparisons: {sort.comparisons} | Swaps: {sort.swaps} | Time Complexity: {sort.timeComplexity} | Space Complexity: {sort.spaceComplexity}";
+        SortInfo.Text = $"Comparisons: {sort.comparisons}		|	Swaps: {sort.swaps}		|	 Time Complexity: {sort.timeComplexity}		|	 Space Complexity: {sort.spaceComplexity}";
     }
 
     private void StopSorting(object sender, EventArgs e)
@@ -155,7 +163,7 @@ public partial class MainPage : ContentPage, INotifyPropertyChanged
     public void Update()
 	{
 		VisualizerView.Invalidate();
-        SortInfo.Text = $"Comparisons: {sort.comparisons} | Swaps: {sort.swaps} | Time Complexity: {sort.timeComplexity} | Space Complexity: {sort.spaceComplexity}";
+        SortInfo.Text = $"Comparisons: {sort.comparisons}		|	Swaps: {sort.swaps}		|	 Time Complexity: {sort.timeComplexity}		|	 Space Complexity: {sort.spaceComplexity}";
     }
 
 	public void NotifyPropertyChanged(string name)
