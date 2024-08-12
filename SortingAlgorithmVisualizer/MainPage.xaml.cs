@@ -1,6 +1,7 @@
 ﻿using SortingAlgorithmVisualizer.Drawables;
 using SortingAlgorithmVisualizer.Sorts;
 using System.ComponentModel;
+
 namespace SortingAlgorithmVisualizer;
 
 public partial class MainPage : ContentPage, INotifyPropertyChanged
