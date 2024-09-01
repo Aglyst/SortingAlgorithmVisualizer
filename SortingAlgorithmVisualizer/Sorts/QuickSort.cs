@@ -9,9 +9,9 @@
             spaceComplexity = "O(n)";
         }
 
-        public override async Task Run(List<int> arr, int waitTime, CancellationToken ct)
+        public override async Task Run(List<int> arr)
         {
-
+            throw new NotImplementedException();
         }
     }
 }

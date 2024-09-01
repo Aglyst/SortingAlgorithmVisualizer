@@ -10,12 +10,15 @@ public abstract class SortBase
     public string timeComplexity;
     public string spaceComplexity;
 
+    public CancellationToken ct;
+    public int waitTime;
+
     public void MainPage(MainPage m)
     {
         page = m;
     }
 
-    public abstract Task Run(List<int> arr, int waitTime, CancellationToken ct);
+    public abstract Task Run(List<int> arr);
 
     public void ClearValues()
     {
@@ -29,6 +32,14 @@ public abstract class SortBase
         ar[ind1] = ar[ind2];
         ar[ind2] = temp;
         swaps++;
+    }
+
+    protected void Cancel()
+    {
+        if (ct.IsCancellationRequested)
+        {
+            ct.ThrowIfCancellationRequested();
+        }
     }
 }
 

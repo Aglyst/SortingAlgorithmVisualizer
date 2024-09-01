@@ -53,10 +53,12 @@ public partial class MainPage : ContentPage, INotifyPropertyChanged
 			{
 				sort.ClearValues();
 				cancellationToken = new CancellationTokenSource();
+				sort.ct = cancellationToken.Token;
 				try
 				{
 					CurrentlySorting = true;
-                    await sort.Run(mainArray, (int)DelaySlider.Value, cancellationToken.Token);
+					sort.waitTime = (int)DelaySlider.Value;
+                    await sort.Run(mainArray);
 					CurrentlySorting = false;
                 }
 				catch (OperationCanceledException ex) { }
@@ -130,7 +132,7 @@ public partial class MainPage : ContentPage, INotifyPropertyChanged
 	{
 		Picker p = (Picker)sender;
 		string val = p.SelectedItem.ToString();
-
+		
 		if (val == "Bubble Sort")
 		{
 			sort = new BubbleSort(this);
@@ -151,6 +153,14 @@ public partial class MainPage : ContentPage, INotifyPropertyChanged
 		{
             sort = new InsertionSort(this);
         }
+		else if (val == "Heap Sort")
+		{
+			sort = new HeapSort(this);
+		}
+		else if(val == "Radix Sort")
+		{
+			sort = new RadixSort(this);
+		}
 
         SortInfo.Text = $"Comparisons: {sort.comparisons}		|	Swaps: {sort.swaps}		|	 Time Complexity: {sort.timeComplexity}		|	 Space Complexity: {sort.spaceComplexity}";
     }

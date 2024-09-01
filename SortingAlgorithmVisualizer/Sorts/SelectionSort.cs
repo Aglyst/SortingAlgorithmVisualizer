@@ -11,17 +11,14 @@ namespace SortingAlgorithmVisualizer.Sorts
             spaceComplexity = "O(1)";
         }
 
-        public override async Task Run(List<int> arr, int waitTime, CancellationToken ct)
+        public override async Task Run(List<int> arr)
         {
             int minInd = 0;
             for(int i = 0; i < arr.Count; i++)
             {
                 for (int j = i; j < arr.Count; j++)
                 {
-                    if (ct.IsCancellationRequested)
-                    {
-                        ct.ThrowIfCancellationRequested();
-                    }
+                    Cancel();
 
                     if (arr[j] < arr[minInd])
                     {
@@ -33,9 +30,9 @@ namespace SortingAlgorithmVisualizer.Sorts
                 //if (minInd != i)
                 //{
                 //  comparisons++;
-                    Swap(arr, i, minInd);
-                    await Task.Delay(waitTime);
-                    page.Update();
+                Swap(arr, i, minInd);
+                await Task.Delay(waitTime);
+                page.Update();
                 //}
                 minInd = i + 1;
             }

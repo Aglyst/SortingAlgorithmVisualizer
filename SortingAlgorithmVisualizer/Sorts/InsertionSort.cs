@@ -9,7 +9,7 @@
             spaceComplexity = "O(1)";
         }
 
-        public override async Task Run(List<int> arr, int waitTime, CancellationToken ct)
+        public override async Task Run(List<int> arr)
         {
             for (int i = 1; i< arr.Count; i++)
             {
@@ -17,10 +17,7 @@
                 int j = i-1;
                 while (j >= 0 && arr[j] > temp)
                 {
-                    if (ct.IsCancellationRequested)
-                    {
-                        ct.ThrowIfCancellationRequested();
-                    }
+                    Cancel();
 
                     arr[j + 1] = arr[j];
                     j--;

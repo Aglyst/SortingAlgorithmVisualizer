@@ -8,9 +8,9 @@ class HeapSort : SortBase
         spaceComplexity = "O(1)";
     }
 
-    public override async Task Run(List<int> arr, int waitTime, CancellationToken ct)
+    public override async Task Run(List<int> arr)
     {
-
+        throw new NotImplementedException();
     }
 }
 
