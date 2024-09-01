@@ -157,7 +157,7 @@ public partial class MainPage : ContentPage, INotifyPropertyChanged
 		{
 			sort = new HeapSort(this);
 		}
-		else if(val == "Radix Sort")
+		else if (val == "Radix Sort")
 		{
 			sort = new RadixSort(this);
 		}
