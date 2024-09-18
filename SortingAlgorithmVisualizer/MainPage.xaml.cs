@@ -77,7 +77,7 @@ public partial class MainPage : ContentPage, INotifyPropertyChanged
 			await Shell.Current.DisplayAlert("Error", "Please generate an array", "Ok");
 		}
 
-		VisualizerView.Invalidate();    // Refresh for debugging purposes, need to remove later
+		// VisualizerView.Invalidate();    // Refresh for debugging purposes, need to remove later
 	}
 
 	private void GenerateBtnClicked(object sender, EventArgs e)
@@ -153,14 +153,14 @@ public partial class MainPage : ContentPage, INotifyPropertyChanged
 		{
             sort = new InsertionSort(this);
         }
-		else if (val == "Heap Sort")
-		{
-			sort = new HeapSort(this);
-		}
-		else if (val == "Radix Sort")
-		{
-			sort = new RadixSort(this);
-		}
+		//else if (val == "Heap Sort")
+		//{
+		//	sort = new HeapSort(this);
+		//}
+		//else if (val == "Radix Sort")
+		//{
+		//	sort = new RadixSort(this);
+		//}
 
         SortInfo.Text = $"Comparisons: {sort.comparisons}		|	Swaps: {sort.swaps}		|	 Time Complexity: {sort.timeComplexity}		|	 Space Complexity: {sort.spaceComplexity}";
     }

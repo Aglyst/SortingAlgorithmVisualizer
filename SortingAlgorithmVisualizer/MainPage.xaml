@@ -41,8 +41,6 @@
                             <x:String>Quick Sort</x:String>
                             <x:String>Selection Sort</x:String>
                             <x:String>Insertion Sort</x:String>
-                            <x:String>Heap Sort</x:String>
-                            <x:String>Radix Sort</x:String>
                         </x:Array>
                     </Picker.ItemsSource>
                 </Picker>
